@@ -97,8 +97,8 @@ function pick(el, cb) {
   stamp.className = "spray-stamp";
   stamp.innerHTML = '<span class="mark">✓ ELEGIDO</span>';
   el.appendChild(stamp);
-  requestAnimationFrame(() => stamp.classList.add("show"));
-  setTimeout(() => { cb(); }, 260);
+  
+  cb();
 }
 
 function marcarSeleccion(selectorAtributo, valorBuscado, permitirMarcar = true) {
@@ -110,13 +110,20 @@ function marcarSeleccion(selectorAtributo, valorBuscado, permitirMarcar = true) 
         stamp.className = "spray-stamp";
         stamp.innerHTML = '<span class="mark">✓ ELEGIDO</span>';
         card.appendChild(stamp);
-        stamp.classList.add("show");
       }
     } else {
       delete card.dataset.locked;
       const existingStamp = card.querySelector(".spray-stamp");
       if (existingStamp) existingStamp.remove();
     }
+  });
+}
+
+function limpiarDOMPorCompleto() {
+  document.querySelectorAll(".spray-stamp").forEach(s => s.remove());
+  document.querySelectorAll(".card").forEach(c => {
+    delete c.dataset.locked;
+    c.style.transform = "";
   });
 }
 
@@ -155,33 +162,26 @@ function actualizarBoton() {
 }
 
 function renderizarPantalla(html, numero, tituloTexto, descripcionTexto, selectorAttr, valorAttr, permitirMarcar = true) {
-  app.classList.add("app-exit");
-  setTimeout(() => {
-    app.innerHTML = html;
-    app.classList.remove("app-exit");
-    paso.innerHTML = numero;
-    titulo.innerHTML = tituloTexto;
-    descripcion.innerHTML = descripcionTexto;
-    pasoActual = numero;
-    
-    sessionStorage.setItem("fl_paso", pasoActual);
-    sessionStorage.setItem("fl_totalPasos", totalPasos);
+  app.innerHTML = html;
+  paso.innerHTML = numero;
+  titulo.innerHTML = tituloTexto;
+  descripcion.innerHTML = descripcionTexto;
+  pasoActual = numero;
+  
+  sessionStorage.setItem("fl_paso", pasoActual);
+  sessionStorage.setItem("fl_totalPasos", totalPasos);
 
-    actualizarBoton();
-    actualizarRail(numero);
-    marcarSeleccion(selectorAttr, valorAttr, permitirMarcar);
-    attachTilt();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, 210);
+  actualizarBoton();
+  actualizarRail(numero);
+  marcarSeleccion(selectorAttr, valorAttr, permitirMarcar);
+  attachTilt();
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// PASO 01: Objetivo / Calculadora entre las opciones
 function iniciarPaso1(mantenerSeleccion = true) {
   if (!mantenerSeleccion) {
-    sessionStorage.removeItem("fl_objetivo");
-    sessionStorage.removeItem("fl_seccion");
-    sessionStorage.removeItem("fl_lugar");
-    sessionStorage.removeItem("fl_dias");
+    sessionStorage.clear();
+    sessionStorage.setItem("fl_session_activa", "1");
     objetivo = "";
     seccionElegida = "";
     lugar = "";
@@ -206,7 +206,6 @@ function iniciarPaso1(mantenerSeleccion = true) {
       <button class="btn">Elegir</button>
     </article>
 
-    <!-- Opción de Calculadora integrada en medio de las tarjetas -->
     <article class="card selection-card" data-obj="calculadora" onclick="pick(this, () => irACalculadora())">
       <div class="card-img-container">
         <div class="slideshow">
@@ -261,9 +260,8 @@ function seleccionarObjetivo(valor) {
   iniciarPaso2(false);
 }
 
-// PASO 02: Sección — Ver Dieta / Ver Rutina
-function iniciarPaso2(limpiarSubniveles = false) {
-  if (limpiarSubniveles) {
+function iniciarPaso2(forzarLimpio = false) {
+  if (forzarLimpio) {
     sessionStorage.removeItem("fl_seccion");
     sessionStorage.removeItem("fl_lugar");
     sessionStorage.removeItem("fl_dias");
@@ -288,7 +286,7 @@ function iniciarPaso2(limpiarSubniveles = false) {
       <button class="btn btn-secondary">Ver Rutina</button>
     </article>
   `;
-  renderizarPantalla(html, "02", "¿Qué querés ver?", `Tu objetivo: ${etiquetaObjetivo(objetivo)}.`, "data-sec", seccionElegida, !limpiarSubniveles);
+  renderizarPantalla(html, "02", "¿Qué querés ver?", `Tu objetivo: ${etiquetaObjetivo(objetivo)}.`, "data-sec", forzarLimpio ? "" : seccionElegida, !forzarLimpio);
 }
 
 function elegirSeccion(tipo) {
@@ -297,15 +295,14 @@ function elegirSeccion(tipo) {
     sessionStorage.setItem("fl_seccion", seccionElegida);
     iniciarPaso3(false);
   } else {
+    limpiarDOMPorCompleto();
     sessionStorage.removeItem("fl_seccion");
-    seccionElegida = "";
-    if (tipo === 'dieta') {
-      window.location.href = "dieta-" + objetivo + ".html";
-    }
+    sessionStorage.setItem("fl_paso", "02");
+    sessionStorage.setItem("fl_origen_dieta", "1");
+    window.location.href = "dieta-" + objetivo + ".html";
   }
 }
 
-// PASO 03: Lugar de entrenamiento
 function iniciarPaso3(limpiarSubnivelDias = false) {
   if (limpiarSubnivelDias) {
     sessionStorage.removeItem("fl_lugar");
@@ -353,7 +350,6 @@ function seleccionarLugar(valor) {
   iniciarPaso4(false);
 }
 
-// PASO 04: Frecuencia semanal
 function iniciarPaso4(mantenerSeleccion = true) {
   if (!mantenerSeleccion) {
     sessionStorage.removeItem("fl_dias");
@@ -399,12 +395,32 @@ function volver() {
     iniciarPaso3(true);
   } else if (pasoActual === "03") {
     iniciarPaso2(true);
-  } else if (pasoActual === "02") {
+  } else {
     iniciarPaso1(false);
   }
 }
 
 function cargarEstadoInicial() {
+  limpiarDOMPorCompleto();
+
+  objetivo = sessionStorage.getItem("fl_objetivo") || "";
+  seccionElegida = sessionStorage.getItem("fl_seccion") || "";
+  lugar = sessionStorage.getItem("fl_lugar") || "";
+  diasElegidos = sessionStorage.getItem("fl_dias") || "";
+  pasoActual = sessionStorage.getItem("fl_paso") || "01";
+  totalPasos = parseInt(sessionStorage.getItem("fl_totalPasos") || "4", 10);
+
+  if (sessionStorage.getItem("fl_origen_dieta") === "1") {
+    sessionStorage.removeItem("fl_origen_dieta");
+    sessionStorage.removeItem("fl_seccion");
+    if (!objetivo) {
+      iniciarPaso1(false);
+    } else {
+      iniciarPaso2(true);
+    }
+    return;
+  }
+
   if (!sessionStorage.getItem("fl_session_activa")) {
     sessionStorage.clear();
     sessionStorage.setItem("fl_session_activa", "1");
@@ -423,7 +439,8 @@ function cargarEstadoInicial() {
   }
 }
 
-cargarEstadoInicial();
+window.addEventListener("pageshow", cargarEstadoInicial);
+window.addEventListener("DOMContentLoaded", cargarEstadoInicial);
 </script>
 
 <script src="background.js"></script>
