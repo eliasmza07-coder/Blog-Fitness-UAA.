@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Elegí tu objetivo y armá tu entrenamiento, dieta o rutina en 4 pasos.">
+<title>Fitness Life — Configurador</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="static-bg" aria-hidden="true"></div>
+
+<svg class="svg-defs" aria-hidden="true">
+  <defs>
+    <filter id="roughEdge" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018 0.09" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<header class="logo-bar">
+  <div class="header-inner">
+    <a href="index.html" class="brand" onclick="sessionStorage.clear();">
+      <span class="pulse-dot"></span>
+      Fitness Life
+    </a>
+    <div class="nav-badge">CONFIGURADOR</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-grid" style="display:block; text-align:center;">
+    <span class="badge" style="margin-inline:auto;">PERSONALIZADO</span>
+    <h1 style="max-width:none; margin-inline:auto;">Construí tu<br>transformación</h1>
+    <p style="margin-inline:auto;">Elegí tu objetivo y armá tu camino. Sin vueltas, sin información de más.</p>
+  </div>
+</section>
+
+<!-- rail de progreso -->
+<div class="rail" id="rail" aria-hidden="true">
+  <div class="stop active"></div>
+  <div class="stop"></div>
+  <div class="stop"></div>
+  <div class="stop"></div>
+</div>
+
+<main class="container">
+  <div class="app-container">
+    <button id="backBtn" class="back-btn" onclick="volver()">← Atrás</button>
+
+    <div class="section-title">
+      <div class="idx" id="paso">01</div>
+      <div>
+        <h2 id="titulo">Elegí tu objetivo</h2>
+        <p id="descripcion">Seleccioná la meta principal para tu rutina.</p>
+      </div>
+    </div>
+
+    <div id="app" class="bento"></div>
+  </div>
+</main>
+
+<footer class="footer">
+  <p>© 2026 FITNESS LIFE // TODOS LOS DERECHOS RESERVADOS.</p>
+  <p class="tagmark">hecho a pulso 🖤</p>
+</footer>
+
+<script>
+const app = document.getElementById("app");
+const titulo = document.getElementById("titulo");
+const descripcion = document.getElementById("descripcion");
+const paso = document.getElementById("paso");
+const backBtn = document.getElementById("backBtn");
+const rail = document.getElementById("rail");
+
+let objetivo = sessionStorage.getItem("fl_objetivo") || "";
+let seccionElegida = sessionStorage.getItem("fl_seccion") || "";
+let lugar = sessionStorage.getItem("fl_lugar") || "";
+let diasElegidos = sessionStorage.getItem("fl_dias") || "";
+let pasoActual = sessionStorage.getItem("fl_paso") || "01";
+let totalPasos = parseInt(sessionStorage.getItem("fl_totalPasos") || "4", 10);
+
+function pick(el, cb) {
+  const parent = el.parentElement;
+  if (parent) {
+    parent.querySelectorAll(".card").forEach((c) => {
+      delete c.dataset.locked;
+      const s = c.querySelector(".spray-stamp");
+      if (s) s.remove();
+    });
+  }
+
+  el.dataset.locked = "1";
+  const stamp = document.createElement("div");
+  stamp.className = "spray-stamp";
+  stamp.innerHTML = '<span class="mark">✓ ELEGIDO</span>';
+  el.appendChild(stamp);
+  requestAnimationFrame(() => stamp.classList.add("show"));
+  setTimeout(() => { cb(); }, 260);
+}
+
+function marcarSeleccion(selectorAtributo, valorBuscado, permitirMarcar = true) {
+  document.querySelectorAll(".card").forEach((card) => {
+    if (permitirMarcar && valorBuscado && card.getAttribute(selectorAtributo) === valorBuscado) {
+      card.dataset.locked = "1";
+      if (!card.querySelector(".spray-stamp")) {
+        const stamp = document.createElement("div");
+        stamp.className = "spray-stamp";
+        stamp.innerHTML = '<span class="mark">✓ ELEGIDO</span>';
+        card.appendChild(stamp);
+        stamp.classList.add("show");
+      }
+    } else {
+      delete card.dataset.locked;
+      const existingStamp = card.querySelector(".spray-stamp");
+      if (existingStamp) existingStamp.remove();
+    }
+  });
+}
+
+function attachTilt() {
+  document.querySelectorAll(".card").forEach((card) => {
+    if (card.dataset.bound) return;
+    card.dataset.bound = "1";
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("role", "button");
+    card.addEventListener("mousemove", (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(700px) rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg) translateY(-4px)`;
+    });
+    card.addEventListener("mouseleave", () => { card.style.transform = ""; });
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); card.click(); }
+    });
+  });
+}
+
+function actualizarRail(numero) {
+  const n = parseInt(numero, 10);
+  const stops = rail.querySelectorAll(".stop");
+  stops.forEach((s, i) => {
+    s.classList.remove("done", "active");
+    s.style.display = i < totalPasos ? "" : "none";
+    if (i + 1 < n) s.classList.add("done");
+    else if (i + 1 === n) s.classList.add("active");
+  });
+}
+
+function actualizarBoton() {
+  backBtn.style.display = pasoActual === "01" ? "none" : "block";
+}
+
+function renderizarPantalla(html, numero, tituloTexto, descripcionTexto, selectorAttr, valorAttr, permitirMarcar = true) {
+  app.classList.add("app-exit");
+  setTimeout(() => {
+    app.innerHTML = html;
+    app.classList.remove("app-exit");
+    paso.innerHTML = numero;
+    titulo.innerHTML = tituloTexto;
+    descripcion.innerHTML = descripcionTexto;
+    pasoActual = numero;
+    
+    sessionStorage.setItem("fl_paso", pasoActual);
+    sessionStorage.setItem("fl_totalPasos", totalPasos);
+
+    actualizarBoton();
+    actualizarRail(numero);
+    marcarSeleccion(selectorAttr, valorAttr, permitirMarcar);
+    attachTilt();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, 210);
+}
+
+// PASO 01: Objetivo / Calculadora entre las opciones
+function iniciarPaso1(mantenerSeleccion = true) {
+  if (!mantenerSeleccion) {
+    sessionStorage.removeItem("fl_objetivo");
+    sessionStorage.removeItem("fl_seccion");
+    sessionStorage.removeItem("fl_lugar");
+    sessionStorage.removeItem("fl_dias");
+    objetivo = "";
+    seccionElegida = "";
+    lugar = "";
+    diasElegidos = "";
+  }
+  sessionStorage.setItem("fl_paso", "01");
+  pasoActual = "01";
+  totalPasos = 4;
+
+  const html = `
+    <article class="card selection-card" data-obj="recomposicion" onclick="pick(this, () => seleccionarObjetivo('recomposicion'))">
+      <div class="card-img-container">
+        <div class="slideshow">
+          <img src="recomposicion1.png" alt="">
+          <img src="recomposicion2.png" alt="">
+          <img src="recomposicion3.png" alt="">
+        </div>
+      </div>
+      <span class="tag">EQUILIBRIO</span>
+      <h2>Recomposición</h2>
+      <p>Ganás músculo mientras reducís grasa corporal al mismo tiempo.</p>
+      <button class="btn">Elegir</button>
+    </article>
+
+    <!-- Opción de Calculadora integrada en medio de las tarjetas -->
+    <article class="card selection-card" data-obj="calculadora" onclick="pick(this, () => irACalculadora())">
+      <div class="card-img-container">
+        <div class="slideshow">
+          <img src="imagenes/calculadora1.jpg" alt="">
+          <img src="imagenes/calculadora2.jpg" alt="">
+        </div>
+      </div>
+      <span class="tag">HERRAMIENTA</span>
+      <h2>Calculadora</h2>
+      <p>Calculá tus calorías, requerimientos diarios y macros exactos.</p>
+      <button class="btn btn-secondary">Calcular</button>
+    </article>
+
+    <article class="card selection-card" data-obj="ganar-musculo" onclick="pick(this, () => seleccionarObjetivo('ganar-musculo'))">
+      <div class="card-img-container">
+        <div class="slideshow">
+          <img src="imagenes/musculo1.jpg" alt="">
+          <img src="imagenes/musculo2.jpg" alt="">
+          <img src="imagenes/musculo3.jpg" alt="">
+        </div>
+      </div>
+      <span class="tag">HIPERTROFIA</span>
+      <h2>Ganar Músculo</h2>
+      <p>Centrado en maximizar tamaño muscular y fuerza con superávit.</p>
+      <button class="btn">Elegir</button>
+    </article>
+
+    <article class="card selection-card" data-obj="perder-grasa" onclick="pick(this, () => seleccionarObjetivo('perder-grasa'))">
+      <div class="card-img-container">
+        <div class="slideshow">
+          <img src="imagenes/grasa1.jpg" alt="">
+          <img src="imagenes/grasa2.jpg" alt="">
+          <img src="imagenes/grasa3.jpg" alt="">
+        </div>
+      </div>
+      <span class="tag">DEFINICIÓN</span>
+      <h2>Perder Grasa</h2>
+      <p>Déficit controlado manteniendo la mayor masa muscular posible.</p>
+      <button class="btn btn-secondary">Elegir</button>
+    </article>
+  `;
+  renderizarPantalla(html, "01", "Elegí tu objetivo", "Seleccioná la meta principal para tu rutina o ingresá a la calculadora.", "data-obj", mantenerSeleccion ? objetivo : "", mantenerSeleccion);
+}
+
+function irACalculadora() {
+  window.location.href = "calculadora.html"; // Ajustá esta ruta si tu archivo se llama distinto
+}
+
+function seleccionarObjetivo(valor) {
+  objetivo = valor;
+  sessionStorage.setItem("fl_objetivo", objetivo);
+  iniciarPaso2(false);
+}
+
+// PASO 02: Sección — Ver / Dieta / Rutina
+function iniciarPaso2(limpiarSubniveles = false) {
+  if (limpiarSubniveles) {
+    sessionStorage.removeItem("fl_seccion");
+    sessionStorage.removeItem("fl_lugar");
+    sessionStorage.removeItem("fl_dias");
+    seccionElegida = "";
+    lugar = "";
+    diasElegidos = "";
+  }
+  totalPasos = 4;
+  sessionStorage.setItem("fl_totalPasos", totalPasos);
+  const html = `
+    <article class="card selection-card" data-sec="plan" onclick="pick(this, () => elegirSeccion('plan'))">
+      <span class="tag">INFORMACIÓN</span>
+      <h2>Ver</h2>
+      <p>Cómo funciona tu objetivo, principios de entrenamiento y frecuencia recomendada.</p>
+      <button class="btn">Ver</button>
+    </article>
+
+    <article class="card selection-card" data-sec="dieta" onclick="pick(this, () => elegirSeccion('dieta'))">
+      <span class="tag">NUTRICIÓN</span>
+      <h2>Ver Dieta</h2>
+      <p>Calculá tus calorías, macros y agua con una herramienta guiada paso a paso.</p>
+      <button class="btn">Ver Dieta</button>
+    </article>
+
+    <article class="card selection-card" data-sec="rutina" onclick="pick(this, () => elegirSeccion('rutina'))">
+      <span class="tag">ENTRENAMIENTO</span>
+      <h2>Ver Rutina</h2>
+      <p>Elegí dónde entrenás y cuántos días, y armamos tu rutina semanal.</p>
+      <button class="btn btn-secondary">Ver Rutina</button>
+    </article>
+  `;
+  renderizarPantalla(html, "02", "¿Qué querés ver?", `Tu objetivo: ${etiquetaObjetivo(objetivo)}.`, "data-sec", seccionElegida, !limpiarSubniveles);
+}
+
+function elegirSeccion(tipo) {
+  if (tipo === 'rutina') {
+    seccionElegida = tipo;
+    sessionStorage.setItem("fl_seccion", seccionElegida);
+    iniciarPaso3(false);
+  } else {
+    sessionStorage.removeItem("fl_seccion");
+    seccionElegida = "";
+    if (tipo === 'plan') {
+      window.location.href = "plan-" + objetivo + ".html";
+    } else if (tipo === 'dieta') {
+      window.location.href = "dieta-" + objetivo + ".html";
+    }
+  }
+}
+
+// PASO 03: Lugar de entrenamiento
+function iniciarPaso3(limpiarSubnivelDias = false) {
+  if (limpiarSubnivelDias) {
+    sessionStorage.removeItem("fl_lugar");
+    sessionStorage.removeItem("fl_dias");
+    lugar = "";
+    diasElegidos = "";
+  }
+  totalPasos = 4;
+  sessionStorage.setItem("fl_totalPasos", 4);
+  const html = `
+    <article class="card selection-card" data-lugar="casa" onclick="pick(this, () => seleccionarLugar('casa'))">
+      <div class="card-img-container">
+        <div class="slideshow">
+          <img src="imagenes/casa1.jpg" alt="">
+          <img src="imagenes/casa2.jpg" alt="">
+          <img src="imagenes/casa3.jpg" alt="">
+        </div>
+      </div>
+      <span class="tag">HOME</span>
+      <h2>Casa</h2>
+      <p>Entrenamiento adaptado con peso corporal, bandas o mancuernas.</p>
+      <button class="btn">Elegir Casa</button>
+    </article>
+
+    <article class="card selection-card" data-lugar="gym" onclick="pick(this, () => seleccionarLugar('gym'))">
+      <div class="card-img-container">
+        <div class="slideshow">
+          <img src="imagenes/gym1.jpg" alt="">
+          <img src="imagenes/gym2.jpg" alt="">
+          <img src="imagenes/gym3.jpg" alt="">
+        </div>
+      </div>
+      <span class="tag">GYM</span>
+      <h2>Gimnasio</h2>
+      <p>Entrenamiento con máquinas, barras y pesas libres.</p>
+      <button class="btn btn-secondary">Elegir Gym</button>
+    </article>
+  `;
+  renderizarPantalla(html, "03", "¿Dónde vas a entrenar?", "Seleccioná tu espacio de entrenamiento habitual.", "data-lugar", lugar, !limpiarSubnivelDias);
+}
+
+function seleccionarLugar(valor) {
+  lugar = valor;
+  sessionStorage.setItem("fl_lugar", lugar);
+  iniciarPaso4(false);
+}
+
+// PASO 04: Frecuencia semanal
+function iniciarPaso4(mantenerSeleccion = true) {
+  if (!mantenerSeleccion) {
+    sessionStorage.removeItem("fl_dias");
+    diasElegidos = "";
+  }
+  const html = `
+    <article class="card selection-card" data-dias="3" onclick="pick(this, () => seleccionarDias(3))">
+      <span class="tag">FRECUENCIA</span>
+      <h2>3 días</h2>
+      <p>Rutina equilibrada para menor disponibilidad semanal.</p>
+      <button class="btn">Elegir 3 Días</button>
+    </article>
+
+    <article class="card selection-card" data-dias="4" onclick="pick(this, () => seleccionarDias(4))">
+      <span class="tag">FRECUENCIA</span>
+      <h2>4 días</h2>
+      <p>Mayor distribución del entrenamiento con más volumen.</p>
+      <button class="btn">Elegir 4 Días</button>
+    </article>
+
+    <article class="card selection-card" data-dias="5" onclick="pick(this, () => seleccionarDias(5))">
+      <span class="tag">FRECUENCIA</span>
+      <h2>5 días</h2>
+      <p>Rutina avanzada con alta frecuencia y enfoque total.</p>
+      <button class="btn btn-secondary">Elegir 5 Días</button>
+    </article>
+  `;
+  renderizarPantalla(html, "04", "Frecuencia semanal", "Seleccioná cuántos días podés entrenar.", "data-dias", mantenerSeleccion ? diasElegidos : "", mantenerSeleccion);
+}
+
+function seleccionarDias(dias) {
+  diasElegidos = dias;
+  sessionStorage.setItem("fl_dias", diasElegidos);
+  window.location.href = `rutina-${objetivo}-${lugar}-${dias}-dias.html`;
+}
+
+function etiquetaObjetivo(valor) {
+  return { "recomposicion": "Recomposición", "ganar-musculo": "Ganar músculo", "perder-grasa": "Perder grasa" }[valor] || valor;
+}
+
+function volver() {
+  if (pasoActual === "04") {
+    iniciarPaso3(true);
+  } else if (pasoActual === "03") {
+    iniciarPaso2(true);
+  } else if (pasoActual === "02") {
+    iniciarPaso1(false);
+  }
+}
+
+function cargarEstadoInicial() {
+  if (!sessionStorage.getItem("fl_session_activa")) {
+    sessionStorage.clear();
+    sessionStorage.setItem("fl_session_activa", "1");
+    iniciarPaso1(false);
+    return;
+  }
+
+  if (pasoActual === "04") {
+    iniciarPaso3(true);
+  } else if (pasoActual === "03" && objetivo && lugar) {
+    iniciarPaso3(false);
+  } else if (pasoActual === "02" && objetivo) {
+    iniciarPaso2(false);
+  } else {
+    iniciarPaso1(false);
+  }
+}
+
+cargarEstadoInicial();
+</script>
+
+<script src="background.js"></script>
+</body>
+</html>

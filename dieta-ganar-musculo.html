@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness Life - Plan de Volumen y Ganancia Muscular</title>
+  <link rel="stylesheet" href="comida.css">
+  <style>
+    /* Soporte para el renderizado de imágenes y diseño de alternativas */
+    .meal-img {
+      width: 75px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: var(--radius-s, 8px);
+      border: 1px solid rgba(245, 245, 241, 0.1);
+      display: block;
+    }
+    .alt-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      background: rgba(40, 167, 69, 0.15);
+      color: #28a745;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    .alt-text {
+      font-size: 0.85rem;
+      color: var(--text-muted, #a0a0a0);
+      line-height: 1.3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de Navegación -->
+  <header class="logo-bar">
+    <div class="header-inner">
+      <a href="#" class="brand">
+        <span class="pulse-dot"></span>
+        Fitness Life
+      </a>
+      <button class="config-btn" onclick="toggleConfig()">Ajustar</button>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="container">
+    <button class="back-btn" onclick="history.back()">← Volver</button>
+    
+    <div class="plan-badge">Protocolo de Hipertrofia // Lunes a Domingo</div>
+    
+    <div class="main-heading">
+      <h2>Ganancia Muscular y Volumen</h2>
+      <p>Plan hipercalórico estructurado para maximizar el entorno anabólico, la síntesis proteica y el rendimiento en los entrenamientos pesados.</p>
+    </div>
+
+    <!-- Objetivos Macro-nutricionales Generales (Hipercalórico) -->
+    <section class="info-card">
+      <div class="block-title">
+        <h3>Promedio Diario de Macronutrientes (Volumen)</h3>
+        <span class="subtitle">Superávit calórico controlado para crecimiento magro continuo</span>
+      </div>
+      <div class="week-map">
+        <div class="on">Calorías <span>~2,950 kcal</span></div>
+        <div class="on">Proteínas <span>200g (2.3g/kg)</span></div>
+        <div class="on">Carbs <span>360g</span></div>
+        <div class="on">Grasas <span>80g</span></div>
+      </div>
+    </section>
+
+    <!-- Pestañas de los Días (Lunes a Domingo) -->
+    <nav class="day-tabs">
+      <button class="day-tab active" onclick="switchDay(event, 'day-lunes')">Lunes</button>
+      <button class="day-tab" onclick="switchDay(event, 'day-martes')">Martes</button>
+      <button class="day-tab" onclick="switchDay(event, 'day-miercoles')">Miércoles</button>
+      <button class="day-tab" onclick="switchDay(event, 'day-jueves')">Jueves</button>
+      <button class="day-tab" onclick="switchDay(event, 'day-viernes')">Viernes</button>
+      <button class="day-tab" onclick="switchDay(event, 'day-sabado')">Sábado</button>
+      <button class="day-tab" onclick="switchDay(event, 'day-domingo')">Domingo</button>
+    </nav>
+
+    <!-- Paneles de las Comidas por Día -->
+    
+    <!-- LUNES -->
+    <div id="day-lunes" class="day-panel active">
+      <div class="block-title">
+        <h3>Lunes // Hipertrofia Pecho y Tríceps</h3>
+      </div>
+      <div class="table-wrapper">
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>Comida</th>
+              <th>Plato Principal & Macros</th>
+              <th>Opción Alternativa Equivalente</th>
+              <th>Imagen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="sets">Comida 1</span></td>
+              <td><span class="ex-name">Huevos enteros, Claras y Avena Gigante</span><span class="ex-focus">3 huevos enteros, 200ml claras, 80g avena con plátano</span><br><span class="badge-rir">48g P / 55g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">300g yogur griego con 1.5 scoops de whey y 70g de cereales integrales.</div></td>
+              <td><img src="https://www.walderwellness.com/wp-content/uploads/2023/04/Protein-Oatmeal-Porridge-With-Eggs-Walder-Wellness-2.jpg" alt="Avena y huevos" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 2</span></td>
+              <td><span class="ex-name">Pechuga de Pollo y Arroz Abundante</span><span class="ex-focus">200g pechuga pollo, 90g arroz en seco, vegetales</span><br><span class="badge-rir">46g P / 70g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">200g de pavo a la plancha con 300g de patata cocida grande.</div></td>
+              <td><img src="https://healthyfitnessmeals.com/wp-content/uploads/2024/12/Chicken-rice-meal-prep-7-1.jpg" alt="Pollo y arroz" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 3</span></td>
+              <td><span class="ex-name">Crema de Arroz con Whey y Frutos Secos</span><span class="ex-focus">60g crema de arroz, 40g whey protein, 20g mantequilla de cacahuete</span><br><span class="badge-rir">42g P / 48g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">6 tortitas de arroz con 200g de queso fresco batido y un puñado de pasas.</div></td>
+              <td><img src="http://tonal.com/cdn/shop/articles/CreamRice2Ways_2_57e339f7-81df-432a-9456-47a275a452d3.jpg?v=1748458144" alt="Crema de arroz" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 4</span></td>
+              <td><span class="ex-name">Salmón con Patata Asada y Brócoli</span><span class="ex-focus">200g salmón, 200g patata al horno, 150g brócoli</span><br><span class="badge-rir">42g P / 35g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">200g de atún rojo con 80g de quinoa y ensalada de acompañamiento.</div></td>
+              <td><img src="https://cdn.cleaneatingmag.com/wp-content/uploads/2015/11/salmon-and-broccoli-with-tangy-lemon-herb-sauce-1.jpg" alt="Salmón con brócoli" class="meal-img"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MARTES -->
+    <div id="day-martes" class="day-panel">
+      <div class="block-title">
+        <h3>Martes // Hipertrofia Pierna (Enfoque Cuádriceps)</h3>
+      </div>
+      <div class="table-wrapper">
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>Comida</th>
+              <th>Plato Principal & Macros</th>
+              <th>Opción Alternativa Equivalente</th>
+              <th>Imagen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="sets">Comida 1</span></td>
+              <td><span class="ex-name">Tostadas Fuertes con Pavo y Huevos</span><span class="ex-focus">3 rebanadas pan masa madre, 100g pavo, 2 huevos enteros</span><br><span class="badge-rir">40g P / 42g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">Tortilla de 5 claras y 2 huevos con 70g de pan integral tostado.</div></td>
+              <td><img src="https://www.walderwellness.com/wp-content/uploads/2023/04/Protein-Oatmeal-Porridge-With-Eggs-Walder-Wellness-2.jpg" alt="Tostada de huevo" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 2</span></td>
+              <td><span class="ex-name">Ternera Magra con Arroz y Puré</span><span class="ex-focus">180g ternera magra, 80g arroz en seco, 150g boniato</span><br><span class="badge-rir">45g P / 65g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">190g de lomo de cerdo con 320g de patata asada bien cargada.</div></td>
+              <td><img src="https://healthyfitnessmeals.com/wp-content/uploads/2024/12/Chicken-rice-meal-prep-7-1.jpg" alt="Ternera y patata" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 3</span></td>
+              <td><span class="ex-name">Yogur Griego Extra con Granola y Miel</span><span class="ex-focus">250g yogur griego, 50g granola alta en proteína, 15g miel</span><br><span class="badge-rir">32g P / 45g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">250g de queso batido con 60g de copos de maíz y un plátano picado.</div></td>
+              <td><img src="http://tonal.com/cdn/shop/articles/CreamRice2Ways_2_57e339f7-81df-432a-9456-47a275a452d3.jpg?v=1748458144" alt="Yogur con frutos" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 4</span></td>
+              <td><span class="ex-name">Bacalao con Arroz Integral y Aceite de Oliva</span><span class="ex-focus">220g bacalao, 70g arroz integral en seco, ensalada</span><br><span class="badge-rir">48g P / 50g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">220g de merluza con 280g de patata cocida y vegetales al vapor.</div></td>
+              <td><img src="https://cdn.cleaneatingmag.com/wp-content/uploads/2015/11/salmon-and-broccoli-with-tangy-lemon-herb-sauce-1.jpg" alt="Merluza ensalada" class="meal-img"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MIÉRCOLES -->
+    <div id="day-miercoles" class="day-panel">
+      <div class="block-title">
+        <h3>Miércoles // Espalda y Bíceps (Día Anabólico)</h3>
+      </div>
+      <div class="table-wrapper">
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>Comida</th>
+              <th>Plato Principal & Macros</th>
+              <th>Opción Alternativa Equivalente</th>
+              <th>Imagen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="sets">Comida 1</span></td>
+              <td><span class="ex-name">Tortilla Anabólica de Avena</span><span class="ex-focus">250ml claras, 2 huevos enteros, 70g avena en tortita</span><br><span class="badge-rir">42g P / 45g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">Gachas potentes con 70g de avena, 35g de proteína y leche entera.</div></td>
+              <td><img src="https://www.walderwellness.com/wp-content/uploads/2023/04/Protein-Oatmeal-Porridge-With-Eggs-Walder-Wellness-2.jpg" alt="Tortilla claras" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 2</span></td>
+              <td><span class="ex-name">Atún o Bonito con Pasta de Trigo Duro</span><span class="ex-focus">3 latas atún, 90g pasta en seco, aguacate</span><br><span class="badge-rir">55g P / 65g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">200g de pollo desmenuzado con 90g de macarrones integrales y tomate.</div></td>
+              <td><img src="https://healthyfitnessmeals.com/wp-content/uploads/2024/12/Chicken-rice-meal-prep-7-1.jpg" alt="Quinoa atún" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 3</span></td>
+              <td><span class="ex-name">Batido Hipercalórico Casero</span><span class="ex-focus">40g whey, 100g avena molida, 300ml leche entera, 1 plátano</span><br><span class="badge-rir">48g P / 85g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">4 barritas energéticas de avena caseras con un gran vaso de leche.</div></td>
+              <td><img src="http://tonal.com/cdn/shop/articles/CreamRice2Ways_2_57e339f7-81df-432a-9456-47a275a452d3.jpg?v=1748458144" alt="Batido fruta" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 4</span></td>
+              <td><span class="ex-name">Pavo Extra con Verduras y Quinoa</span><span class="ex-focus">200g pavo a la plancha, 80g quinoa en seco, espárragos</span><br><span class="badge-rir">46g P / 55g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">200g de pechuga de pollo con 90g de cuscús y judías verdes salteadas.</div></td>
+              <td><img src="https://cdn.cleaneatingmag.com/wp-content/uploads/2015/11/salmon-and-broccoli-with-tangy-lemon-herb-sauce-1.jpg" alt="Pavo verduras" class="meal-img"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- JUEVES -->
+    <div id="day-jueves" class="day-panel">
+      <div class="block-title">
+        <h3>Jueves // Hombros y Trapecio</h3>
+      </div>
+      <div class="table-wrapper">
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>Comida</th>
+              <th>Plato Principal & Macros</th>
+              <th>Opción Alternativa Equivalente</th>
+              <th>Imagen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="sets">Comida 1</span></td>
+              <td><span class="ex-name">Avena Cremosa con Proteína y Nueces</span><span class="ex-focus">70g avena, 35g whey, 200ml leche descremada, 15g nueces</span><br><span class="badge-rir">44g P / 50g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">Panqueques de avena gruesos con jarabe sin azúcar y trozos de plátano.</div></td>
+              <td><img src="https://www.walderwellness.com/wp-content/uploads/2023/04/Protein-Oatmeal-Porridge-With-Eggs-Walder-Wellness-2.jpg" alt="Gachas de avena" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 2</span></td>
+              <td><span class="ex-name">Pollo con Arroz Basmati y Maíz</span><span class="ex-focus">200g pollo, 85g arroz basmati en seco, 50g maíz dulce</span><br><span class="badge-rir">46g P / 72g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">200g de pavo con 90g de arroz integral y guisantes.</div></td>
+              <td><img src="https://healthyfitnessmeals.com/wp-content/uploads/2024/12/Chicken-rice-meal-prep-7-1.jpg" alt="Pavo y arroz" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 3</span></td>
+              <td><span class="ex-name">Tortitas de Arroz con Crema de Cacahuete y Plátano</span><span class="ex-focus">5 tortitas, 25g crema de cacahuete, 1 plátano rodajas</span><br><span class="badge-rir">10g P / 65g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">2 rebanadas de pan de molde integral con doble capa de crema de cacahuete y miel.</div></td>
+              <td><img src="http://tonal.com/cdn/shop/articles/CreamRice2Ways_2_57e339f7-81df-432a-9456-47a275a452d3.jpg?v=1748458144" alt="Tortitas" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 4</span></td>
+              <td><span class="ex-name">Lubina con Patata y Calabacín al Horno</span><span class="ex-focus">220g lubina, 250g patata asada, 150g calabacín</span><br><span class="badge-rir">42g P / 45g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">220g de dorada al horno con 200g de boniato en rodajas.</div></td>
+              <td><img src="https://cdn.cleaneatingmag.com/wp-content/uploads/2015/11/salmon-and-broccoli-with-tangy-lemon-herb-sauce-1.jpg" alt="Lubina cena" class="meal-img"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- VIERNES -->
+    <div id="day-viernes" class="day-panel">
+      <div class="block-title">
+        <h3>Viernes // Pierna (Enfoque Isquios y Glúteo)</h3>
+      </div>
+      <div class="table-wrapper">
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>Comida</th>
+              <th>Plato Principal & Macros</th>
+              <th>Opción Alternativa Equivalente</th>
+              <th>Imagen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="sets">Comida 1</span></td>
+              <td><span class="ex-name">Huevos Revueltos Potentes</span><span class="ex-focus">3 huevos enteros, 2 tostadas grandes integrales con aguacate</span><br><span class="badge-rir">26g P / 35g C / 20g G</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">Bagel integral con 2 huevos a la plancha y lonchas de pavo.</div></td>
+              <td><img src="https://www.walderwellness.com/wp-content/uploads/2023/04/Protein-Oatmeal-Porridge-With-Eggs-Walder-Wellness-2.jpg" alt="Huevos revueltos" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 2</span></td>
+              <td><span class="ex-name">Pollo al Curry con Arroz y Almendras</span><span class="ex-focus">200g pollo, 85g arroz, salsa de curry casera ligera</span><br><span class="badge-rir">46g P / 68g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">190g de ternera picada magra con 85g de arroz basmati y verduras salteadas.</div></td>
+              <td><img src="https://healthyfitnessmeals.com/wp-content/uploads/2024/12/Chicken-rice-meal-prep-7-1.jpg" alt="Pollo curry" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 3</span></td>
+              <td><span class="ex-name">Queso Batido con Frutos Secos y Miel</span><span class="ex-focus">250g queso 0%, 20g nueces o almendras, 10g miel</span><br><span class="badge-rir">30g P / 20g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">250g de yogur Skyr con 30g de cereales de avena crujiente.</div></td>
+              <td><img src="http://tonal.com/cdn/shop/articles/CreamRice2Ways_2_57e339f7-81df-432a-9456-47a275a452d3.jpg?v=1748458144" alt="Postre proteico" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 4</span></td>
+              <td><span class="ex-name">Atún Fresco con Patata Cocida y Judías</span><span class="ex-focus">200g atún fresco, 250g patata cocida, 150g judías</span><br><span class="badge-rir">48g P / 45g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">200g de salmón a la plancha con 200g de boniato hervido.</div></td>
+              <td><img src="https://cdn.cleaneatingmag.com/wp-content/uploads/2015/11/salmon-and-broccoli-with-tangy-lemon-herb-sauce-1.jpg" alt="Atun y judias" class="meal-img"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SÁBADO -->
+    <div id="day-sabado" class="day-panel">
+      <div class="block-title">
+        <h3>Sábado // Brazo Completo / Alta Energía</h3>
+      </div>
+      <div class="table-wrapper">
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>Comida</th>
+              <th>Plato Principal & Macros</th>
+              <th>Opción Alternativa Equivalente</th>
+              <th>Imagen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="sets">Comida 1</span></td>
+              <td><span class="ex-name">Pancakes Anabólicos Grandes</span><span class="ex-focus">60g harina de avena, 150ml claras, 1 huevo, plátano entero</span><br><span class="badge-rir">42g P / 52g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">Crepes de trigo integral rellenos de crema de cacao proteica casera.</div></td>
+              <td><img src="https://www.walderwellness.com/wp-content/uploads/2023/04/Protein-Oatmeal-Porridge-With-Eggs-Walder-Wellness-2.jpg" alt="Pancakes" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 2</span></td>
+              <td><span class="ex-name">Lomo de Cerdo con Boniato Gigante</span><span class="ex-focus">180g lomo de cerdo, 250g boniato asado</span><br><span class="badge-rir">42g P / 52g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">200g de pechuga de pollo con 300g de patata asada al romero.</div></td>
+              <td><img src="https://healthyfitnessmeals.com/wp-content/uploads/2024/12/Chicken-rice-meal-prep-7-1.jpg" alt="Cerdo" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 3</span></td>
+              <td><span class="ex-name">Batido Whey y Frutos Rojos con Avena</span><span class="ex-focus">35g whey, 50g avena molida, 80g frutos rojos, agua/leche</span><br><span class="badge-rir">38g P / 50g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">Yogur proteico bebible grande acompañado de 2 barritas de cereal natural.</div></td>
+              <td><img src="http://tonal.com/cdn/shop/articles/CreamRice2Ways_2_57e339f7-81df-432a-9456-47a275a452d3.jpg?v=1748458144" alt="Batido frutos" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 4</span></td>
+              <td><span class="ex-name">Merluza con Arroz y Vegetales Salteados</span><span class="ex-focus">220g merluza, 75g arroz blanco en seco, pimientos y cebolla</span><br><span class="badge-rir">45g P / 60g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">220g de pota o calamar a la plancha con 80g de cuscús de verduras.</div></td>
+              <td><img src="https://cdn.cleaneatingmag.com/wp-content/uploads/2015/11/salmon-and-broccoli-with-tangy-lemon-herb-sauce-1.jpg" alt="Papillote pescado" class="meal-img"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOMINGO -->
+    <div id="day-domingo" class="day-panel">
+      <div class="block-title">
+        <h3>Domingo // Descanso y Súper Recuperación</h3>
+      </div>
+      <div class="table-wrapper">
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>Comida</th>
+              <th>Plato Principal & Macros</th>
+              <th>Opción Alternativa Equivalente</th>
+              <th>Imagen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="sets">Comida 1</span></td>
+              <td><span class="ex-name">Tostada Doble con Aguacate, Huevo y Salmón</span><span class="ex-focus">2 rebanadas pan masa madre, 50g aguacate, 2 huevos, 40g salmón ahumado</span><br><span class="badge-rir">28g P / 30g C / 22g G</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">Tortilla francesa de 3 huevos con trozos de pavo y pan tostado con aceite.</div></td>
+              <td><img src="https://www.walderwellness.com/wp-content/uploads/2023/04/Protein-Oatmeal-Porridge-With-Eggs-Walder-Wellness-2.jpg" alt="Tostada aguacate" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 2</span></td>
+              <td><span class="ex-name">Pollo Asado con Arroz Integral Extendido</span><span class="ex-focus">200g pollo asado, 80g arroz integral en seco</span><br><span class="badge-rir">46g P / 60g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">190g de ternera magra asada con 80g de pasta integral.</div></td>
+              <td><img src="https://healthyfitnessmeals.com/wp-content/uploads/2024/12/Chicken-rice-meal-prep-7-1.jpg" alt="Pollo arroz integral" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 3</span></td>
+              <td><span class="ex-name">Yogur Proteico con Fruta y Miel</span><span class="ex-focus">250g yogur proteico, 1 plátano picado, 15g miel</span><br><span class="badge-rir">28g P / 40g C</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">Requesón o queso cottage (200g) con mermelada sin azúcar y un puñado de nueces.</div></td>
+              <td><img src="http://tonal.com/cdn/shop/articles/CreamRice2Ways_2_57e339f7-81df-432a-9456-47a275a452d3.jpg?v=1748458144" alt="Yogur miel" class="meal-img"></td>
+            </tr>
+            <tr>
+              <td><span class="sets">Comida 4</span></td>
+              <td><span class="ex-name">Salmón al Horno con Patata y Ensalada</span><span class="ex-focus">200g salmón, 200g patata hervida, lechuga y tomate</span><br><span class="badge-rir">40g P / 38g C / 18g G</span></td>
+              <td><span class="alt-badge">Opción B</span><div class="alt-text">220g de atún fresco a la plancha con puré de patata casero y brócoli.</div></td>
+              <td><img src="https://cdn.cleaneatingmag.com/wp-content/uploads/2015/11/salmon-and-broccoli-with-tangy-lemon-herb-sauce-1.jpg" alt="Salmon cena" class="meal-img"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="brand-text">Fitness Life Systems // Protocolo de Volumen Hipercalórico</span>
+  </footer>
+
+  <script>
+    function switchDay(evt, panelId) {
+      const panels = document.querySelectorAll('.day-panel');
+      panels.forEach(p => p.classList.remove('active'));
+
+      const tabs = document.querySelectorAll('.day-tab');
+      tabs.forEach(t => t.classList.remove('active'));
+
+      document.getElementById(panelId).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+
+    function toggleConfig() {
+      alert("Configurador de calorías y superávit de volumen Fitness Life habilitado.");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>Fitness Life — Rutina Gym · Hipertrofia · 5 Días</title>
+<!-- Enlace al archivo CSS externo -->
+<link rel="stylesheet" href="ejercicios.css">
+</head>
+<body>
+
+<header class="logo-bar">
+  <div class="header-inner">
+    <a href="#" class="brand">
+      <span class="pulse-dot"></span>
+      Fitness Life
+    </a>
+    <div class="config-btn">RUTINA 5 DIAS</div>
+  </div>
+</header>
+
+<main class="container">
+  <!-- Zona del Hero con estilo idéntico a la imagen -->
+  <div class="plan-badge">Plan Personalizado</div>
+  
+  <div class="main-heading">
+    <h2>Construí Tu<br>Transformación</h2>
+    <p>Elegí tu objetivo y armá tu camino. Sin vueltas, con la técnica perfecta.</p>
+  </div>
+
+  <!-- Indicadores inferiores naranjas de la imagen -->
+  <div class="carousel-indicators">
+    <div class="indicator-bar active"></div>
+    <div class="indicator-bar"></div>
+    <div class="indicator-bar"></div>
+    <div class="indicator-bar"></div>
+  </div>
+
+  <!-- Botón de retroceso al index anterior -->
+  <div class="back-nav" style="margin-bottom: 1.5rem;">
+    <a href="javascript:history.back()" style="color: #a0a0a0; text-decoration: none; font-size: 0.9rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.2s; cursor: pointer;">
+      <span style="font-size: 1.1rem;">←</span> Atrás
+    </a>
+  </div>
+
+  <!-- Bloque de contenido técnico de la rutina -->
+  <div class="info-card">
+    <h4 style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Distribución de la Semana</h4>
+    <div class="week-map">
+      <div class="on">Lunes<span>Empuje</span></div>
+      <div class="on">Martes<span>Tracción</span></div>
+      <div class="on">Miércoles<span>Pierna</span></div>
+      <div>Jueves<span>Descanso</span></div>
+      <div class="on">Viernes<span>Superior</span></div>
+      <div class="on">Sábado<span>Inferior</span></div>
+      <div>Domingo<span>Libre</span></div>
+    </div>
+  </div>
+
+  <!-- Selector por pestañas (5 Días) -->
+  <div class="day-tabs">
+    <button class="day-tab active" data-day="1">1. Empuje</button>
+    <button class="day-tab" data-day="2">2. Tracción</button>
+    <button class="day-tab" data-day="3">3. Pierna</button>
+    <button class="day-tab" data-day="4">4. Superior</button>
+    <button class="day-tab" data-day="5">5. Inferior</button>
+  </div>
+
+  <div id="panels">
+    <!-- DÍA 1: EMPUJE -->
+    <div class="day-panel active" data-day="1">
+      <div class="block-title">
+        <h3>Día 01 - Empuje
+          <span class="subtitle">Foco en Pectoral, Deltoides Anterior/Lateral y Tríceps</span>
+        </h3>
+      </div>
+      <div class="table-wrapper">
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>Vista</th>
+              <th>Ejercicio & Técnica</th>
+              <th>Volumen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Press de Banca Plano</strong>
+                <span class="ex-focus">Barra libre • Controlar fase excéntrica</span>
+              </td>
+              <td>
+                <span class="sets">4 x 6-8</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Press Inclinado con Mancuernas</strong>
+                <span class="ex-focus">Mancuernas • Enfoque pectoral clavicular</span>
+              </td>
+              <td>
+                <span class="sets">4 x 8-10</span><br>
+                <span class="badge-rir">RIR 2</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Fondos en Paralelas</strong>
+                <span class="ex-focus">Inclinación al frente • Enfocado en pecho</span>
+              </td>
+              <td>
+                <span class="sets">3 x 8-10</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Elevaciones Laterales con Mancuerna</strong>
+                <span class="ex-focus">Deltoides lateral • Control total</span>
+              </td>
+              <td>
+                <span class="sets">4 x 12-15</span><br>
+                <span class="badge-rir">RIR 0</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Press Militar con Mancuernas Sentado</strong>
+                <span class="ex-focus">Deltoides anterior y medio</span>
+              </td>
+              <td>
+                <span class="sets">3 x 8-10</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Extensión de Tríceps en Polea (Soga)</strong>
+                <span class="ex-focus">Contracción máxima final</span>
+              </td>
+              <td>
+                <span class="sets">3 x 10-12</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Extensiones de Tríceps por Encima de la Cabeza</strong>
+                <span class="ex-focus">Enfoque cabeza larga del tríceps</span>
+              </td>
+              <td>
+                <span class="sets">3 x 10-12</span><br>
+                <span class="badge-rir">RIR 0</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DÍA 2: TRACCIÓN -->
+    <div class="day-panel" data-day="2">
+      <div class="block-title">
+        <h3>Día 02 - Tracción
+          <span class="subtitle">Foco en Dorsales, Espalda Media, Deltoides Posterior y Bíceps</span>
+        </h3>
+      </div>
+      <div class="table-wrapper">
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>Vista</th>
+              <th>Ejercicio & Técnica</th>
+              <th>Volumen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Dominadas Lastradas o Libres</strong>
+                <span class="ex-focus">Agarre pronado • Rango completo</span>
+              </td>
+              <td>
+                <span class="sets">4 x 6-8</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Remo con Barra Libre</strong>
+                <span class="ex-focus">Torso inclinado 45° • Espalda neutra</span>
+              </td>
+              <td>
+                <span class="sets">4 x 8-10</span><br>
+                <span class="badge-rir">RIR 2</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Jalón al Pecho Agarre Neutro</strong>
+                <span class="ex-focus">Polea alta • Depresión escapular</span>
+              </td>
+              <td>
+                <span class="sets">3 x 10-12</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Remo en Polea Baja Agarre Estrecho</strong>
+                <span class="ex-focus">Foco en grosor central de espalda</span>
+              </td>
+              <td>
+                <span class="sets">3 x 10-12</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Pájaros con Mancuernas (Deltoides Posterior)</strong>
+                <span class="ex-focus">Banco inclinado</span>
+              </td>
+              <td>
+                <span class="sets">3 x 12-15</span><br>
+                <span class="badge-rir">RIR 0</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Curl de Bíceps con Mancuernas (Supinación)</strong>
+                <span class="ex-focus">Alterno • Control excéntrico</span>
+              </td>
+              <td>
+                <span class="sets">3 x 10-12</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Curl Martillo en Polea con Cuerda</strong>
+                <span class="ex-focus">Foco en braquial y grosor de brazo</span>
+              </td>
+              <td>
+                <span class="sets">3 x 10-12</span><br>
+                <span class="badge-rir">RIR 0</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DÍA 3: PIERNA -->
+    <div class="day-panel" data-day="3">
+      <div class="block-title">
+        <h3>Día 03 - Pierna (Enfoque Cuádriceps)
+          <span class="subtitle">Foco en Cuádriceps, Aductores, Glúteo y Pantorrillas</span>
+        </h3>
+      </div>
+      <div class="table-wrapper">
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>Vista</th>
+              <th>Ejercicio & Técnica</th>
+              <th>Volumen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Sentadilla Libre con Barra</strong>
+                <span class="ex-focus">Profundidad paralela • Estabilidad</span>
+              </td>
+              <td>
+                <span class="sets">4 x 6-8</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Prensa Inclinada a 45°</strong>
+                <span class="ex-focus">Pies bajos • Vasto externo</span>
+              </td>
+              <td>
+                <span class="sets">4 x 8-10</span><br>
+                <span class="badge-rir">RIR 2</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Extensiones de Cuádriceps en Máquina</strong>
+                <span class="ex-focus">Pausa de 1s arriba</span>
+              </td>
+              <td>
+                <span class="sets">3 x 12-15</span><br>
+                <span class="badge-rir">RIR 0</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Zancadas Búlgaras con Mancuernas</strong>
+                <span class="ex-focus">Unilateral • Rango profundo</span>
+              </td>
+              <td>
+                <span class="sets">3 x 10 por pierna</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Sentadilla Hack o Hack Squat</strong>
+                <span class="ex-focus">Intensidad alta para cuádriceps</span>
+              </td>
+              <td>
+                <span class="sets">3 x 10-12</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Elevación de Talones de Pie (Gemelos)</strong>
+                <span class="ex-focus">Estiramiento completo</span>
+              </td>
+              <td>
+                <span class="sets">4 x 12-15</span><br>
+                <span class="badge-rir">RIR 0</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DÍA 4: SUPERIOR -->
+    <div class="day-panel" data-day="4">
+      <div class="block-title">
+        <h3>Día 04 - Superior (Variado / Frecuencia Alta)
+          <span class="subtitle">Foco en Pecho, Espalda, Hombros y Brazos</span>
+        </h3>
+      </div>
+      <div class="table-wrapper">
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>Vista</th>
+              <th>Ejercicio & Técnica</th>
+              <th>Volumen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Press Plano con Mancuernas</strong>
+                <span class="ex-focus">Rango amplio de estiramiento</span>
+              </td>
+              <td>
+                <span class="sets">4 x 8-10</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Remo en Polea Baja Agarre Estrecho</strong>
+                <span class="ex-focus">Espalda neutra • Grosor</span>
+              </td>
+              <td>
+                <span class="sets">4 x 8-10</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Press Militar de Pie con Barra</strong>
+                <span class="ex-focus">Fuerza general de hombro</span>
+              </td>
+              <td>
+                <span class="sets">3 x 6-8</span><br>
+                <span class="badge-rir">RIR 2</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Aperturas en Polea Baja (Cables)</strong>
+                <span class="ex-focus">Congestión superior del pectoral</span>
+              </td>
+              <td>
+                <span class="sets">3 x 12-15</span><br>
+                <span class="badge-rir">RIR 0</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Curl de Bíceps en Banco Inclinado</strong>
+                <span class="ex-focus">Máxima tensión en cabeza larga</span>
+              </td>
+              <td>
+                <span class="sets">3 x 10-12</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Extensión de Tríceps Copa a dos manos</strong>
+                <span class="ex-focus">Mancuerna tras nuca</span>
+              </td>
+              <td>
+                <span class="sets">3 x 10-12</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DÍA 5: INFERIOR -->
+    <div class="day-panel" data-day="5">
+      <div class="block-title">
+        <h3>Día 05 - Inferior (Enfoque Isquios & Glúteos)
+          <span class="subtitle">Foco en Cadena Posterior, Glúteos y Estabilidad de Core</span>
+        </h3>
+      </div>
+      <div class="table-wrapper">
+        <table class="routine-table">
+          <thead>
+            <tr>
+              <th>Vista</th>
+              <th>Ejercicio & Técnica</th>
+              <th>Volumen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Peso Muerto Rumano con Barra</strong>
+                <span class="ex-focus">Énfasis en estiramiento de isquios</span>
+              </td>
+              <td>
+                <span class="sets">4 x 6-8</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Hip Thrust con Barra</strong>
+                <span class="ex-focus">Pausa de 2s en contracción máxima</span>
+              </td>
+              <td>
+                <span class="sets">4 x 8-10</span><br>
+                <span class="badge-rir">RIR 1</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Curl Femoral Acostado en Máquina</strong>
+                <span class="ex-focus">Control total en la bajada</span>
+              </td>
+              <td>
+                <span class="sets">3 x 10-12</span><br>
+                <span class="badge-rir">RIR 0</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Sentadilla Goblet Profunda</strong>
+                <span class="ex-focus">Bombeo final metabólico</span>
+              </td>
+              <td>
+                <span class="sets">3 x 12-15</span><br>
+                <span class="badge-rir">RIR 0</span>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="video-thumb-box"></div></td>
+              <td>
+                <strong class="ex-name">Plancha Abdominal Isométrica</strong>
+                <span class="ex-focus">Fuerza y estabilidad de core</span>
+              </td>
+              <td>
+                <span class="sets">3 x 45 seg</span><br>
+                <span class="badge-rir">RIR 0</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="brand-text">Fitness Life Gym — 2026</div>
+</footer>
+
+<!-- Enlace al archivo JS externo -->
+<script src="script.js"></script>
+
+</body>
+</html>
