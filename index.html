@@ -206,19 +206,6 @@ function iniciarPaso1(mantenerSeleccion = true) {
       <button class="btn">Elegir</button>
     </article>
 
-    <article class="card selection-card" data-obj="calculadora" onclick="pick(this, () => irACalculadora())">
-      <div class="card-img-container">
-        <div class="slideshow">
-          <img src="imagenes/calculadora1.jpg" alt="">
-          <img src="imagenes/calculadora2.jpg" alt="">
-        </div>
-      </div>
-      <span class="tag">HERRAMIENTA</span>
-      <h2>Calculadora</h2>
-      <p>Calculá tus calorías, requerimientos diarios y macros exactos.</p>
-      <button class="btn btn-secondary">Calcular</button>
-    </article>
-
     <article class="card selection-card" data-obj="ganar-musculo" onclick="pick(this, () => seleccionarObjetivo('ganar-musculo'))">
       <div class="card-img-container">
         <div class="slideshow">
@@ -245,6 +232,20 @@ function iniciarPaso1(mantenerSeleccion = true) {
       <h2>Perder Grasa</h2>
       <p>Déficit controlado manteniendo la mayor masa muscular posible.</p>
       <button class="btn btn-secondary">Elegir</button>
+    </article>
+
+    <article class="card selection-card" data-obj="calculadora" onclick="pick(this, () => irACalculadora())">
+      <div class="card-img-container">
+        <div class="slideshow">
+          <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80" alt="Calculadora nutricional 1">
+          <img src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?auto=format&fit=crop&w=600&q=80" alt="Calculadora nutricional 2">
+          <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80" alt="Calculadora nutricional 3">
+        </div>
+      </div>
+      <span class="tag">HERRAMIENTA</span>
+      <h2>Calculadora</h2>
+      <p>Calculá tus calorías, requerimientos diarios y macros exactos.</p>
+      <button class="btn btn-secondary">Calcalcular</button>
     </article>
   `;
   renderizarPantalla(html, "01", "Elegí tu objetivo", "Seleccioná la meta principal para tu rutina o ingresá a la calculadora.", "data-obj", mantenerSeleccion ? objetivo : "", mantenerSeleccion);
